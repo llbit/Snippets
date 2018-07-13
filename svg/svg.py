@@ -9,9 +9,15 @@ class svg:
         H = ymax-ymin if ymax-ymin else height
         pwidth = width - 2*pad
         pheight = height - 2*pad
+        # Use smallest scale so that all points fit in the canvas:
+        xscale = pwidth / float(xmax - xmin) if xmax - xmin else 1e9
+        yscale = pheight / float(ymax - ymin) if ymax - ymin else 1e9
+        self.scale = min(xscale, yscale)
+        xpad = (width - (xmax-xmin) * self.scale) / 2
+        ypad = (height - (ymax-ymin) * self.scale) / 2
         # Point mapping function for scaling points to the canvas and
         # flipping the Y axis.
-        self.pmap = lambda (x,y): (pad+pwidth*float(x-xmin)/W, pad+pheight*(1-float(y-ymin)/H))
+        self.pmap = lambda (x,y): (xpad + (x-xmin)*self.scale, ypad + (ymax-y)*self.scale)
 
     def __enter__(self):
         self.fp.write('<?xml version="1.0" encoding="UTF-8" ?>\n')
@@ -30,7 +36,7 @@ class svg:
     def circle(self, x, y, r, attributes=""):
         p = self.pmap((x, y))
         self.fp.write('  <circle cx="%f" cy="%f" r="%f" %s/>\n' \
-                % (p[0], p[1], r, attributes))
+                % (p[0], p[1], r * self.scale, attributes))
 
     def path(self, points, attributes="", closed=False):
         self.fp.write('  <path d="M')
