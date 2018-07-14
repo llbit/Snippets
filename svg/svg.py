@@ -10,8 +10,14 @@ class svg:
         pwidth = width - 2*pad
         pheight = height - 2*pad
         # Use smallest scale so that all points fit in the canvas:
-        xscale = pwidth / float(xmax - xmin) if xmax - xmin else 1e9
-        yscale = pheight / float(ymax - ymin) if ymax - ymin else 1e9
+        if xmax == xmin:
+            xmin = 0
+            xmax = width
+        if ymax == ymin:
+            ymin = 0
+            ymax = height
+        xscale = pwidth / float(xmax - xmin)
+        yscale = pheight / float(ymax - ymin)
         self.scale = min(xscale, yscale)
         xpad = (width - (xmax-xmin) * self.scale) / 2
         ypad = (height - (ymax-ymin) * self.scale) / 2
@@ -44,11 +50,12 @@ class svg:
             self.fp.write(' %f,%f' % self.pmap(p))
         self.fp.write(' %s" %s/>\n' % ("z" if closed else "", attributes))
 
-# Usage example:
-with open('test.svg', 'w') as fp:
-    with svg(fp, 100, 100) as fig:
-        fig.circle(70, 50, 30, 'fill="red"')
-        fig.rect(50, 50, 20, 20)
-        fig.path([ (0, 50), (100, 50) ], 'stroke="blue" stroke-width="2"')
-        fig.path([ (50, 0), (50, 100) ], 'stroke="green" stroke-width="2"')
-        fig.path([ (0, 0), (5, 5), (5, 95), (95, 95) ], 'stroke="black" stroke-width="1" fill="none"')
+if __name__ == "__main__":
+    # Usage example:
+    with open('test.svg', 'w') as fp:
+        with svg(fp, 100, 100) as fig:
+            fig.circle(70, 50, 30, 'fill="red"')
+            fig.rect(50, 50, 20, 20)
+            fig.path([ (0, 50), (100, 50) ], 'stroke="blue" stroke-width="2"')
+            fig.path([ (50, 0), (50, 100) ], 'stroke="green" stroke-width="2"')
+            fig.path([ (0, 0), (5, 5), (5, 95), (95, 95) ], 'stroke="black" stroke-width="1" fill="none"')
