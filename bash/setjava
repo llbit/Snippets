@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Configure java and javac alternatives on Debian-based systems.
+
+set -eu
+
+sudo update-alternatives --config java
+sudo update-alternatives --config javac
+
+echo "java -version:"
+java -version
+
+echo "javac -version:"
+javac -version
