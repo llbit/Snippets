@@ -7,3 +7,4 @@ set -eu
 JAVA_HOME=$1
 sudo update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 100
 sudo update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 100
+sudo update-alternatives --install /usr/bin/javap javap $JAVA_HOME/bin/javap 100
