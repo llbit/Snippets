@@ -1,0 +1,9 @@
+[alias]
+	ci = commit
+	stat = status -sb
+	s = status -sb
+	d = diff
+	p = pull
+	a = add
+[log]
+	date = iso8601

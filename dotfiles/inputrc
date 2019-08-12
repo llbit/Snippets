@@ -1,0 +1,10 @@
+set bind-tty-special-chars off
+set bell-style none
+set editing-mode vi
+set expand-tilde off
+
+set keymap vi-insert
+C-w: unix-filename-rubout
+
+set keymap vi-command
+C-w: unix-filename-rubout

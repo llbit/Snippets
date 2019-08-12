@@ -1,0 +1,17 @@
+" Disable vi compatibility.
+set nocompatible
+
+" No backup files.
+set nobackup
+
+" Search settings.
+set hlsearch
+set incsearch
+
+" Always show status and ruler.
+set laststatus=2
+set ruler
+
+" Store swapfiles in ~/.vim_tmp/swap.
+set dir=$HOME/.vim_tmp/swap
+if !isdirectory(&dir) | call mkdir(&dir, 'p', 0700) | endif
