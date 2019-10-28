@@ -1,6 +1,9 @@
 " Disable vi compatibility.
 set nocompatible
 
+" Disable beeping.
+set visualbell
+
 " No backup files.
 set nobackup
 

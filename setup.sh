@@ -2,7 +2,7 @@
 
 # Set up a new linux system.
 # Usage:
-# curl -s -S -L https://raw.githubusercontent.com/llbit/snippets/master/setup.sh | bash
+# curl -sSL https://raw.githubusercontent.com/llbit/snippets/master/setup.sh | bash
 
 set -eu
 
